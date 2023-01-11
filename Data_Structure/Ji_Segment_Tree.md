@@ -108,8 +108,6 @@ struct Segment_Tree {
 #undef mid
 } T;
 int main() {
-	freopen("data.in", "r", stdin);
-	freopen("my.out", "w", stdout);
 	int n = read(), m = read();
 	T.build(1, 1, n);
 	while (m--) {
