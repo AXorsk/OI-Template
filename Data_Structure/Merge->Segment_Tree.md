@@ -17,8 +17,6 @@ inline void link(int u, int v) {
 	hd[u] = cnte;
 }
 struct Segment_Tree {
-#define lson k << 1
-#define rson k << 1 | 1
 #define mid (l + r >> 1)
 	int tot;
 	struct tNode { int sum, mx, lc, rc; } t[MAXN * 50];
@@ -44,8 +42,6 @@ struct Segment_Tree {
 		t[p].rc = merge(t[p].rc, t[q].rc, mid + 1, r);
 		return pushup(p), p;
 	}
-#undef lson
-#undef rson
 #undef mid
 } T;
 void misaka(int u, int p) {
