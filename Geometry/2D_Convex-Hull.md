@@ -1,4 +1,4 @@
-Convex-Hull
+2D_Convex-Hull
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
