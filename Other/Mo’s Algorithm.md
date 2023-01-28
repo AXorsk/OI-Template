@@ -68,4 +68,5 @@ int main() {
 	for (int i = 1; i <= cntq; ++i)
 		write(ans[i]), putchar('\n');
 	return 0;
-}```
+}
+```
