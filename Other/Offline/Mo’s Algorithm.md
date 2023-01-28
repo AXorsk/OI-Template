@@ -1,4 +1,63 @@
-Mo’s Algorithm
+Mo’s Algorithm (Original)
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const int MAXN = 5e4 + 6;
+int a[MAXN], cnt[MAXN], n, m, block;
+struct tQue { int l, r, id; } q[MAXN];
+struct tAns { int l, r; ll p, q; } ans[MAXN];
+inline int read() {
+	int x = 0; bool f = 0; char ch = getchar();
+	while (!isdigit(ch)) f |= ch == '-', ch = getchar();
+	while (isdigit(ch)) x = (x << 1) + (x << 3) + (ch ^ 48), ch = getchar();
+	return f ? -x : x;
+}
+void write(ll x) {
+	if (x < 0) putchar('-'), x = -x;
+	if (x > 9) write(x / 10);
+	putchar(x % 10 ^ 48);
+}
+ll gcd(ll x, ll y) { return y ? gcd(y, x % y) : x; }
+inline bool cmp(tQue u, tQue v) {
+	if (u.l / block != v.l / block) return u.l / block < v.l / block;
+	if (u.l / block & 1) return u.r < v.r;
+	return u.r > v.r;
+}
+int main() {
+	n = read(), m = read();
+	block = sqrt(n);
+	for (int i = 1; i <= n; ++i)
+		a[i] = read();
+	for (int i = 1; i <= m; ++i) {
+		int x = read(), y = read();
+		q[i] = {x, y, i};
+		ans[i] = {x, y, 0, 1};
+	}
+	sort(q + 1, q + m + 1, cmp);
+	int l = 1, r = 0; ll now = 0;
+	for (int i = 1; i <= m; ++i) {
+		while (q[i].l < l) now += cnt[a[--l]]++;
+		while (q[i].l > l) now -= --cnt[a[l++]];
+		while (q[i].r > r) now += cnt[a[++r]]++;
+		while (q[i].r < r) now -= --cnt[a[r--]];
+		ans[q[i].id].p = now;
+	}
+	for (int i = 1; i <= m; ++i) {
+		if (ans[i].l == ans[i].r)
+			ans[i].p = 0, ans[i].q = 1;
+		else {
+			ans[i].q = (ans[i].r - ans[i].l + 1ll) * (ans[i].r - ans[i].l) >> 1;
+			ll g = gcd(ans[i].p, ans[i].q);
+			ans[i].p /= g; ans[i].q /= g;
+		}
+		write(ans[i].p); putchar('/');
+		write(ans[i].q); putchar('\n');
+	}
+	return 0;
+}
+```
+Mo’s Algorithm (Modifiable)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
