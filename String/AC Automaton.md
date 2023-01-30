@@ -1,4 +1,4 @@
-Aho-Corasick Automaton
+AC Automaton
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
