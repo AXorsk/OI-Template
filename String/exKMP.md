@@ -1,5 +1,5 @@
 exKMP _(Function Z)_ 
-1. "extern"
+1. "extend"
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
