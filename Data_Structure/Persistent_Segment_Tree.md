@@ -64,53 +64,45 @@ inline int read() {
 	return f ? -x : x;
 }
 void write(int x) {
-	if (x < 0) putchar('-'), x = -x;
+	if (x < 0) putchar('-');
 	if (x > 9) write(x / 10);
 	putchar(x % 10 ^ 48);
 }
 const int MAXN = 2e5 + 6;
-int n, m, q, a[MAXN], b[MAXN], root[MAXN];
-struct tNode { int lson, rson, val; };
+int n, m, k, a[MAXN], b[MAXN], rt[MAXN];
 struct Segment_Tree {
 #define mid (l + r >> 1)
-	tNode tree[MAXN * 50]; int size;
-	inline void pushup(int k) {
-		tree[k].val = tree[tree[k].lson].val + tree[tree[k].rson].val;
-	}
-	inline int build(int l, int r) {
-		int k = ++size;
-		if (l == r) return k;
-		tree[k].lson = build(l, mid);
-		tree[k].rson = build(mid + 1, r);
-		return pushup(k), k;
-	}
-	inline int modify(int p, int l, int r, int x) {
-		int q = ++size; tree[q] = tree[p];
-		if (l == r) return ++tree[q].val, q;
-		if (x <= mid) tree[q].lson = modify(tree[p].lson, l, mid, x);
-		else tree[q].rson = modify(tree[p].rson, mid + 1, r, x);
+	int tot;
+	struct tNode { int lc, rc, sum; } t[MAXN * 20];
+	inline void pushup(int k) { t[k].sum = t[t[k].lc].sum + t[t[k].rc].sum; }
+	int modify(int p, int l, int r, int x) {
+		int q = ++tot; t[q] = t[p];
+		if (l == r) return ++t[q].sum, q;
+		if (x <= mid) t[q].lc = modify(t[p].lc, l, mid, x);
+		else t[q].rc = modify(t[p].rc, mid + 1, r, x);
 		return pushup(q), q;
 	}
-	inline int query(int p, int q, int l, int r, int k) {
+	int query(int p, int q, int l, int r, int x) {
 		if (l == r) return l;
-		int lsum = tree[tree[q].lson].val - tree[tree[p].lson].val;
-		if (k <= lsum) return query(tree[p].lson, tree[q].lson, l, mid, k);
-		else return query(tree[p].rson, tree[q].rson, mid + 1, r, k - lsum);
+		int lsum = t[t[q].lc].sum - t[t[p].lc].sum;
+		if (lsum >= x) return query(t[p].lc, t[q].lc, l, mid, x);
+		else return query(t[p].rc, t[q].rc, mid + 1, r, x - lsum);
 	}
-} T;
+#undef mid
+} PT;
 int main() {
-	n = read(), q = read();
-	for (int i = 1; i <= n; ++i) a[i] = b[i] = read();
+	n = read(), m = read();
+	for (int i = 1; i <= n; ++i)
+		b[i] = a[i] = read();
 	sort(b + 1, b + n + 1);
-	m = unique(b + 1, b + n + 1) - (b + 1);
-	root[0] = T.build(1, m);
+	k = unique(b + 1, b + n + 1) - (b + 1);
 	for (int i = 1; i <= n; ++i) {
-		int x = lower_bound(b + 1, b + m + 1, a[i]) - b;
-		root[i] = T.modify(root[i - 1], 1, m, x);
+		a[i] = lower_bound(b + 1, b + k + 1, a[i]) - b;
+		rt[i] = PT.modify(rt[i - 1], 1, k, a[i]);
 	}
-	while (q--) {
-		int l = read(), r = read(), k = read();
-		write(b[T.query(root[l - 1], root[r], 1, m, k)]); putchar('\n');
+	while (m--) {
+		int l = read(), r = read(), x = read();
+		write(b[PT.query(rt[l - 1], rt[r], 1, k, x)]); putchar('\n');
 	}
 	return 0;
 }
