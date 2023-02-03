@@ -14,40 +14,41 @@ void write(int x) {
 	putchar(x % 10 ^ 48);
 }
 const int MAXN = 1e6 + 6;
-int n, m, root[MAXN];
-struct tNode { int lson, rson, val; };
+int n, m, rt[MAXN];
 struct Segment_Tree {
 #define mid (l + r >> 1)
-	tNode tree[MAXN * 100]; int size;
-	inline void build(int k, int l, int r) {
-		if (l == r) return tree[k].val = read(), void();
-		tree[k].lson = ++size; tree[k].rson = ++size;
-		build(tree[k].lson, l, mid);
-		build(tree[k].rson, mid + 1, r);
+	int tot;
+	struct tNode { int lc, rc, sum; } t[MAXN * 30];
+	void build(int k, int l, int r) {
+		if (l == r) return t[k].sum = read(), void();
+		t[k].lc = ++tot; t[k].rc = ++tot;
+		build(t[k].lc, l, mid);
+		build(t[k].rc, mid + 1, r);
 	}
-	inline void modify(int lk, int k, int l, int r, int x, int v) {
-		if (l == r) return tree[k].val = v, void();
-		tree[k] = tree[lk];
-		if (x <= mid) tree[k].lson = ++size, modify(tree[lk].lson, tree[k].lson, l, mid, x, v);
-		else tree[k].rson = ++size, modify(tree[lk].rson, tree[k].rson, mid + 1, r, x, v);
+	void modify(int lk, int k, int l, int r, int x, int v) {
+		if (l == r) return t[k].sum = v, void();
+		t[k] = t[lk];
+		if (x <= mid) t[k].lc = ++tot, modify(t[lk].lc, t[k].lc, l, mid, x, v);
+		else t[k].rc = ++tot, modify(t[lk].rc, t[k].rc, mid + 1, r, x, v);
 	}
-	inline int query(int k, int l, int r, int x) {
-		if (l == r) return tree[k].val;
-		if (x <= mid) return query(tree[k].lson, l, mid, x);
-		else return query(tree[k].rson, mid + 1, r, x);
+	int query(int k, int l, int r, int x) {
+		if (l == r) return t[k].sum;
+		if (x <= mid) return query(t[k].lc, l, mid, x);
+		else return query(t[k].rc, mid + 1, r, x);
 	}
-} T;
+#undef mid
+} PT;
 int main() {
 	n = read(), m = read();
-	T.build(root[0] = ++T.size, 1, n);
+	PT.build(rt[0] = ++PT.tot, 1, n);
 	for (int i = 1; i <= m; ++i) {
 		int vs = read(), op = read(), x = read();
 		if (op == 1) {
 			int v = read();
-			T.modify(root[vs], root[i] = ++T.size, 1, n, x, v);
+			PT.modify(rt[vs], rt[i] = ++PT.tot, 1, n, x, v);
 		} else {
-			root[i] = root[vs];
-			write(T.query(root[vs], 1, n, x)), putchar('\n');
+			rt[i] = rt[vs];
+			write(PT.query(rt[vs], 1, n, x)), putchar('\n');
 		}
 	}
 	return 0;
