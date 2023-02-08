@@ -60,14 +60,14 @@ struct Link_Cut_Tree {
 		while (ch[x][0]) x = ch[x][0];
 		splay(x); return x;
 	}
-	inline void link(int u, int v) { makeroot(u); fa[u] = v; }
-	inline void split(int u, int v) { makeroot(u); access(v); splay(v); }
-	inline void cut(int u, int v) {
-		split(u, v);
-		if (fa[u] == v && !ch[u][1])
-			ch[v][0] = fa[u] = 0;
+	inline void link(int x, int y) { makeroot(x); fa[x] = y; }
+	inline void split(int x, int y) { makeroot(x); access(y); splay(y); }
+	inline void cut(int x, int y) {
+		split(x, y);
+		if (fa[x] == y && !ch[x][1])
+			ch[y][0] = fa[x] = 0;
 	}
-	inline int query(int u, int v) { split(u, v); return tree[v]; }
+	inline int query(int x, int y) { split(x, y); return tree[y]; }
 	inline void change(int x, int v) { splay(x); a[x] = v; }
 } LCT;
 int main() {
