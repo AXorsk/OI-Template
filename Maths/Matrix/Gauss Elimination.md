@@ -1,4 +1,4 @@
-Gaussian_Elimination  _Gauss-Jordan_ 
+Gauss_Elimination  _Gauss-Jordan_ 
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
