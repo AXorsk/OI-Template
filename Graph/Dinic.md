@@ -74,10 +74,10 @@ inline int read() {
 	return f ? -x : x;
 }
 using ll = long long;
-const int MAXN = 5e3 + 6, MAXM = 5e4 + 6, INF = INT_MAX;
+const int MAXN = 5e3 + 6, MAXM = 5e4 + 6, INF = 2e9;
 int n, m, s, t, all, cnte = 1;
 int hd[MAXN], cur[MAXN], vis[MAXN], dvis[MAXN];
-ll dis[MAXN], ans, sum;
+ll dis[MAXN], maxflow, mincost;
 struct tEdge { int to, nxt; ll cap, cost; } e[MAXM << 1];
 inline void link(int u, int v, int w, int c) {
 	e[++cnte] = {v, hd[u], w, c}; hd[u] = cnte;
@@ -109,7 +109,7 @@ ll misaka(int u, ll f) {
 		if (dvis[v] || !e[i].cap || dis[v] != dis[u] + e[i].cost) continue;
 		ll d = misaka(v, min(e[i].cap, now));
 		if (d) {
-			sum += d * e[i].cost;
+			mincost += d * e[i].cost;
 			e[i].cap -= d;
 			e[i ^ 1].cap += d;
 			now -= d;
@@ -118,13 +118,12 @@ ll misaka(int u, ll f) {
 	}
 	return f - now;
 }
-inline ll MCMF() {
-	ll ret = 0;
+inline void MCMF() {
+	maxflow = 0, mincost = 0;
 	while (SPFA()) {
 		memset(dvis, 0, sizeof dvis);
-		ret += misaka(s, INF);
+		maxflow += misaka(s, INF);
 	}
-	return ret;
 }
 int main() {
 	n = read(), m = read(), s = read(), t = read(); all = n;
@@ -132,8 +131,7 @@ int main() {
 		int u = read(), v = read(), w = read(), c = read();
 		link(u, v, w, c);
 	}
-	ans = MCMF();
-	printf("%lld %lld\n", ans, sum);
+	MCMF(); printf("%lld %lld\n", maxflow, mincost);
 	return 0;
 }
 ```
