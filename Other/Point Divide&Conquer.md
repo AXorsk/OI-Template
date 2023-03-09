@@ -16,27 +16,25 @@ inline void link(int u, int v, int w) {
 	e[++cnte] = {v, hd[u], w};
 	hd[u] = cnte;
 }
-void getroot(int u, int p, int n) {
-	sz[u] = 1; mxp[u] = 0;
+void updsize(int u, int p) {
+	sz[u] = 1;
 	for (int i = hd[u]; i; i = e[i].nxt) {
 		int v = e[i].to;
-		if (v == p || vis[v]) continue;
-		getroot(v, u, n);
+		if (vis[v] || v == p) continue;
+		updsize(v, u);
 		sz[u] += sz[v];
+	}
+}
+void getroot(int u, int p, int n) {
+	mxp[u] = 0;
+	for (int i = hd[u]; i; i = e[i].nxt) {
+		int v = e[i].to;
+		if (vis[v] || v == p) continue;
+		getroot(v, u, n);
 		mxp[u] = max(mxp[u], sz[v]);
 	}
 	mxp[u] = max(mxp[u], n - sz[u]);
 	if (mxp[u] < mxp[root]) root = u;
-	// mxp[u] < mxp[root]    ...YES
-	// mxp[u] <= n / 2       ...NO
-}
-void getdis(int u, int d, int p) {
-	dis[++cntd] = d;
-	for (int i = hd[u]; i; i = e[i].nxt) {
-		int v = e[i].to, w = e[i].wei;
-		if (v == p || vis[v]) continue;
-		getdis(v, d + w, u);
-	}
 }
 int calc(int u, int d) {
 	cntd = 0; getdis(u, d, 0);
@@ -55,7 +53,7 @@ void solve(int u) {
 		int v = e[i].to, w = e[i].wei;
 		if (vis[v]) continue;
 		ans -= calc(v, w);
-		mxp[root = 0] = INT_MAX;
+		updsize(v, u); mxp[root = 0] = INT_MAX;
 		getroot(v, 0, sz[v]); solve(root);
 	}
 }
@@ -66,7 +64,7 @@ int main() {
 		link(u, v, w); link(v, u, w);
 	}
 	k = read();
-	mxp[root = 0] = INT_MAX;
+	updsize(1, 0); mxp[root = 0] = INT_MAX;
 	getroot(1, 0, n); solve(root);
 	printf("%d\n", ans);
 	return 0;
@@ -91,13 +89,21 @@ inline void link(int u, int v, int w) {
 	e[++cnte] = {v, hd[u], w};
 	hd[u] = cnte;
 }
+void updsize(int u, int p) {
+	sz[u] = 1;
+	for (int i = hd[u]; i; i = e[i].nxt) {
+		int v = e[i].to;
+		if (vis[v] || v == p) continue;
+		updsize(v, u);
+		sz[u] += sz[v];
+	}
+}
 void getroot(int u, int p, int n) {
-	sz[u] = 1, mxp[u] = 0;
+	mxp[u] = 0;
 	for (int i = hd[u]; i; i = e[i].nxt) {
 		int v = e[i].to;
 		if (vis[v] || v == p) continue;
 		getroot(v, u, n);
-		sz[u] += sz[v];
 		mxp[u] = max(mxp[u], sz[v]);
 	}
 	mxp[u] = max(mxp[u], n - sz[u]);
@@ -133,7 +139,7 @@ void solve(int u) {
 	for (int i = hd[u]; i; i = e[i].nxt) {
 		int v = e[i].to;
 		if (vis[v]) continue;
-		mxp[root = 0] = INT_MAX;
+		updsize(v, u); mxp[root = 0] = INT_MAX;
 		getroot(v, 0, sz[v]); solve(root);
 	}
 }
@@ -145,7 +151,7 @@ int main() {
 	}
 	for (int i = 1; i <= m; ++i)
 		q[i] = read();
-	mxp[root = 0] = INT_MAX;
+	updsize(1, 0); mxp[root = 0] = INT_MAX;
 	getroot(1, 0, n); solve(root);
 	for (int i = 1; i <= m; ++i) {
 		if (f[i]) puts("AYE");
