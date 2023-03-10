@@ -1,4 +1,4 @@
-FHQ_Treap covers on Segment_Tree
+FHQ_Treap in Segment_Tree
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
