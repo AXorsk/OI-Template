@@ -1,4 +1,4 @@
-Point Divide&Conquer 1:
+Point Divide 1:
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -70,7 +70,7 @@ int main() {
 	return 0;
 }
 ```
-Point Divide&Conquer 2:
+Point Divide 2:
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
