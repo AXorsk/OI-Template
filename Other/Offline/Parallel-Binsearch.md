@@ -1,4 +1,4 @@
-Parallel-Binsearch Divide&Conquer
+Parallel-Binsearch
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
