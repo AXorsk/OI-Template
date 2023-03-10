@@ -1,4 +1,4 @@
-CDQ Divide&Conquer (3D Partial Order)
+CDQ Divide (3D Partial Order)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
