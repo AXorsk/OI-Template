@@ -1,4 +1,4 @@
-Maximum weight matching in a bipartite graph
+Bigraph-Match
 
 Hungarian
 ```cpp
@@ -31,7 +31,7 @@ int main() {
 }
 ```
 
-Dinic
+Maxflow (Dinic)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
