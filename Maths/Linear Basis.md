@@ -3,18 +3,18 @@ Linear Basis1
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const int MAXN = 50 + 6;
+const int MAXN = 66;
 int n; ll p[MAXN];
 inline void insert(ll x) {
-	for (int i = 50; i >= 0; --i)
-		if (x & (1ll << i)) {
+	for (int i = 60; ~i; --i)
+		if ((x >> i) & 1) {
 			if (!p[i]) return p[i] = x, void();
 			else x ^= p[i];
 		}
 }
-inline ll getans() {
+inline ll get_max() {
 	ll ans = 0;
-	for (int i = 50; i >= 0; --i)
+	for (int i = 60; ~i; --i)
 		if ((ans ^ p[i]) > ans)
 			ans ^= p[i];
 	return ans;
@@ -25,9 +25,53 @@ int main() {
 		ll x; scanf("%lld", &x);
 		insert(x);
 	}
-	printf("%lld\n", getans());
+	printf("%lld\n", get_max());
 	return 0;
 }
+Linear Basis2
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const int MAXN = 66;
+int n, m; ll k, p[MAXN];
+inline void insert(ll x) {
+	for (int i = 60; ~i; --i)
+		if ((x >> i) & 1) {
+			if (!p[i]) return p[i] = x, void();
+			else x ^= p[i];
+		}
+}
+inline void rebuild() {
+	for (int i = 60; ~i; --i) {
+		if (!p[i]) continue;
+		for (int j = i + 1; j <= 60; ++j)
+			if ((p[j] >> i) & 1) p[j] ^= p[i];
+	}
+	m = 0;
+	for (int i = 0; i <= 60; ++i)
+		if (p[i]) p[m++] = p[i];
+}
+inline ll query_k() {
+	if (m < n) --k;
+	if ((1ll << m) <= k) return -1;
+	ll ans = 0;
+	for (int i = 0; i <= 60; ++i)
+		if ((k >> i) & 1)
+			ans ^= p[i];
+	return ans;
+}
+int main() {
+	scanf("%d%lld", &n, &k);
+	for (int i = 1; i <= n; ++i) {
+		ll x; scanf("%lld", &x);
+		insert(x);
+	}
+	rebuild();
+	printf("%lld\n", query_k());
+	return 0;
+}
+```
 ```
 Prefix Linear Basis
 ```cpp
