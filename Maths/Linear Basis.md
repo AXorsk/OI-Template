@@ -1,4 +1,4 @@
-Linear Basis1
+Linear Basis1 (max)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -28,7 +28,8 @@ int main() {
 	printf("%lld\n", get_max());
 	return 0;
 }
-Linear Basis2
+```
+Linear Basis2 (kth)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -71,7 +72,6 @@ int main() {
 	printf("%lld\n", query_k());
 	return 0;
 }
-```
 ```
 Prefix Linear Basis
 ```cpp
