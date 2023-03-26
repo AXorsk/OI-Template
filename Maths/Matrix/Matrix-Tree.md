@@ -10,6 +10,14 @@ inline int read() {
 }
 const int MAXN = 306, MOD = 1e9 + 7;
 int n, m, t, a[MAXN][MAXN];
+inline void link_origin(int x, int y, int z) {
+	(a[x][x] += z) %= MOD; (a[y][y] += z) %= MOD;
+	(a[x][y] -= z) %= MOD; (a[y][x] -= z) %= MOD;
+}
+inline void link_outer(int x, int y, int z) {
+	(a[y][y] += z) %= MOD;
+	(a[x][y] -= z) %= MOD;
+}
 inline int det() {
 	// remove the root: i = 1;
 	int ans = 1, f = 1;
@@ -24,20 +32,17 @@ inline int det() {
 			swap(a[i], a[j]); f = -f;
 		}
 	for (int i = 2; i <= n; ++i)
-		ans = 1ll * ans *  a[i][i] % MOD;
+		ans = 1ll * ans * a[i][i] % MOD;
 	return (ans * f + MOD) % MOD;
 }
 int main() {
+	freopen("data.in", "r", stdin);
+	freopen("my.out", "w", stdout);
 	n = read(), m = read(), t = read();
 	for (int i = 1; i <= m; ++i) {
 		int x = read(), y = read(), z = read();
-		if (!t) {
-			(a[x][x] += z) %= MOD; (a[y][y] += z) %= MOD;
-			(a[x][y] -= z) %= MOD; (a[y][x] -= z) %= MOD;
-		} else {
-			(a[y][y] += z) %= MOD;
-			(a[x][y] -= z) %= MOD;
-		}
+		if (!t) link_origin(x, y, z);
+		else link_outer(x, y, z);
 	}
 	printf("%d\n", det());
 	return 0;
