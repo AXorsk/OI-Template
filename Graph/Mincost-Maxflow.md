@@ -9,16 +9,21 @@ inline int read() {
 	return f ? -x : x;
 }
 using ll = long long;
+void write(ll x) {
+	if (x < 0) putchar('-'), x = -x;
+	if (x > 9) write(x / 10);
+	putchar(x % 10 ^ 48);
+}
 const int MAXN = 5e3 + 6, MAXM = 5e4 + 6, INF = 2e9;
 int n, m, s, t, all, cnte = 1;
 int hd[MAXN], cur[MAXN], vis[MAXN], dvis[MAXN];
-ll dis[MAXN], maxflow, mincost;
-struct tEdge { int to, nxt; ll cap, cost; } e[MAXM << 1];
-inline void link(int u, int v, int w, int c) {
+ll dis[MAXN], max_flow, min_cost;
+struct tNode { int to, nxt; ll cap, cost; } e[MAXM << 1];
+inline void link(int u, int v, ll w, ll c) {
 	e[++cnte] = {v, hd[u], w, c}; hd[u] = cnte;
 	e[++cnte] = {u, hd[v], 0, -c}; hd[v] = cnte;
 }
-inline bool SPFA() {
+bool SPFA() {
 	fill(dis, dis + all + 1, INF); dis[s] = 0;
 	memset(vis, 0, sizeof vis); vis[s] = 1;
 	queue <int> q; q.emplace(s);
@@ -27,7 +32,7 @@ inline bool SPFA() {
 		for (int i = hd[u]; i; i = e[i].nxt) {
 			int v = e[i].to;
 			if (!e[i].cap) continue;
-			if (dis[v] > dis[u] + e[i].cost) {
+			if (dis[u] + e[i].cost < dis[v]) {
 				dis[v] = dis[u] + e[i].cost;
 				if (!vis[v]) q.emplace(v), vis[v] = 1;
 			}
@@ -35,30 +40,28 @@ inline bool SPFA() {
 	}
 	return dis[t] != INF;
 }
-ll misaka(int u, ll f) {
-	if (u == t) return f;
-	ll now = f; dvis[u] = 1;
+ll misaka(int u, ll flow) {
+	if (u == t) return flow;
+	ll now = flow; dvis[u] = 1;
 	// dvis: prevent from running in "0" circle
 	for (int &i = cur[u]; i; i = e[i].nxt) {
 		int v = e[i].to;
 		if (dvis[v] || !e[i].cap || dis[v] != dis[u] + e[i].cost) continue;
 		ll d = misaka(v, min(e[i].cap, now));
 		if (d) {
-			mincost += d * e[i].cost;
-			e[i].cap -= d;
-			e[i ^ 1].cap += d;
-			now -= d;
-			if (!now) break;
+			min_cost += d * e[i].cost;
+			e[i].cap -= d; e[i ^ 1].cap += d;
+			now -= d; if (!now) break;
 		}
 	}
-	return f - now;
+	return flow - now;
 }
-inline void MCMF() {
-	maxflow = 0, mincost = 0;
+void mcmf() {
+	max_flow = min_cost = 0;
 	while (SPFA()) {
 		memset(dvis, 0, sizeof dvis);
 		memcpy(cur, hd, sizeof hd);
-		maxflow += misaka(s, INF);
+		max_flow += misaka(s, INF);
 	}
 }
 int main() {
@@ -67,7 +70,9 @@ int main() {
 		int u = read(), v = read(), w = read(), c = read();
 		link(u, v, w, c);
 	}
-	MCMF(); printf("%lld %lld\n", maxflow, mincost);
+	mcmf();
+	write(max_flow); putchar(' ');
+	write(min_cost); putchar('\n');
 	return 0;
 }
 ```
