@@ -1,4 +1,4 @@
-Merge->Segment_Tree
+Merge->Segment_Tree (P4556)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -47,7 +47,7 @@ struct Segment_Tree {
 void misaka(int u, int p) {
 	f[u][0] = p; dep[u] = dep[p] + 1;
 	for (int i = 1; i <= 20; ++i)
-		f[u][i] = f[f[u][i - 1]][ i - 1];
+		f[u][i] = f[f[u][i - 1]][i - 1];
 	for (int i = hd[u], v; i; i = e[i].nxt) {
 		if ((v = e[i].to) == p) continue;
 		misaka(v, u);

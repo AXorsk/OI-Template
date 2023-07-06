@@ -1,4 +1,4 @@
-FHQ_Treap (General)
+FHQ_Treap [General] (P3369)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -70,27 +70,27 @@ int main() {
 		}
 		if (op == 3) {
 			T.split(T.root, v - 1, x, y);
-			write(T.sz[x] + 1); putchar('\n');
+			write(T.sz[x] + 1), putchar('\n');
 			T.root = T.merge(x, y);
 		}
 		if (op == 4) write(T.query(T.root, v)), putchar('\n');
 		if (op == 5) {
 			T.split(T.root, v - 1, x, y); z = x;
 			while (T.ch[z][1]) z = T.ch[z][1];
-			write(T.val[z]); putchar('\n');
+			write(T.val[z]), putchar('\n');
 			T.root = T.merge(x, y);
 		}
 		if (op == 6) {
 			T.split(T.root, v, x, y); z = y;
 			while (T.ch[z][0]) z = T.ch[z][0];
-			write(T.val[z]); putchar('\n');
+			write(T.val[z]), putchar('\n');
 			T.root = T.merge(x, y);
 		}
 	}
 	return 0;
 }
 ```
-FHQ_Treap (Reverse)
+FHQ_Treap [Reverse] (P3391)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -155,7 +155,7 @@ struct FHQ_Treap {
 		if (!k) return;
 		pushdown(k);
 		misaka(ch[k][0]);
-		write(val[k]); putchar(' ');
+		write(val[k]), putchar(' ');
 		misaka(ch[k][1]);
 	}
 } T;

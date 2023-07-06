@@ -1,4 +1,4 @@
-Leftist_Tree (Mergeable_Heap)
+Leftist_Tree [Mergeable_Heap] (P3377)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -11,12 +11,7 @@ inline int read() {
 const int MAXN = 1e5 + 6;
 int n, m, a[MAXN], vis[MAXN], dis[MAXN];
 int lson[MAXN], rson[MAXN], fa[MAXN];
-inline int find(int x) {
-	int r = x;
-	while (r != fa[r]) r = fa[r];
-	while (x != r) { int t = fa[x]; fa[x] = r; x = t; }
-	return r;
-}
+int find(int x) { return x == fa[x] ? x : fa[x] = find(fa[x]); }
 int merge(int x, int y) {
 	if (!x || !y) return x | y;
 	if (a[y] < a[x]) swap(x, y);
@@ -26,8 +21,8 @@ int merge(int x, int y) {
 	return x;
 }
 int main() {
-	// Leftist_Tree: lson[] & rson[].
-	// Union_Find_Set: fa[].
+	// Leftist_Tree: lson[] & rson[]
+	// Union_Find_Set: fa[]
 	n = read(), m = read();
 	for (int i = 1; i <= n; ++i)
 		a[i] = read(), fa[i] = i;

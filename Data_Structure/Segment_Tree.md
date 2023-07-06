@@ -1,4 +1,4 @@
-Segment_Tree
+Segment_Tree (P3372)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -53,6 +53,9 @@ struct Segment_Tree {
 		if (y > mid) ans += query(rson, mid + 1, r, x, y);
 		return ans;
 	}
+#undef lson
+#undef rson
+#undef mid
 } T;
 int main() {
 	int n = read(), m = read();

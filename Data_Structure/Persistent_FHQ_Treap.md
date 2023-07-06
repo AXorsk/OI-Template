@@ -1,4 +1,4 @@
-Persistent_FHQ_Treap (General)
+Persistent_FHQ_Treap [General] (P3835)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -75,27 +75,27 @@ int main() {
 		}
 		if (op == 3) {
 			T.split(root[i], v - 1, x, y);
-			write(T.t[x].sz); putchar('\n');
+			write(T.t[x].sz), putchar('\n');
 			root[i] = T.merge(x, y);
 		}
 		if (op == 4) write(T.query(root[i], v + 1)), putchar('\n');
 		if (op == 5) {
 			T.split(root[i], v - 1, x, y); z = x;
 			while (T.t[z].rson) z = T.t[z].rson;
-			write(T.t[z].val); putchar('\n');
+			write(T.t[z].val), putchar('\n');
 			root[i] = T.merge(x, y);
 		}
 		if (op == 6) {
 			T.split(root[i], v, x, y); z = y;
 			while (T.t[z].lson) z = T.t[z].lson;
-			write(T.t[z].val); putchar('\n');
+			write(T.t[z].val), putchar('\n');
 			root[i] = T.merge(x, y);
 		}
 	}
 	return 0;
 }
 ```
-Persistent_FHQ_Treap (Reverse)
+Persistent_FHQ_Treap [Reverse] (P5055)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -202,7 +202,7 @@ int main() {
 			T.split(root[i], r, x, z);
 			T.split(x, l - 1, x, y);
 			last = T.t[y].sum;
-			write(last); putchar('\n');
+			write(last), putchar('\n');
 			root[i] = T.merge(T.merge(x, y), z);
 		}
 	}

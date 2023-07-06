@@ -1,4 +1,4 @@
-Splay
+Splay (P6136)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -115,5 +115,6 @@ int main() {
 		}
 	}
 	write(ans);
+    return 0;
 }
 ```

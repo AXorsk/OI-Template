@@ -1,4 +1,4 @@
-Split->Segment_Tree
+Split->Segment_Tree (P5494)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -20,7 +20,7 @@ struct Segment_Tree {
 #define mid (l + r >> 1)
 	int tot, cntb, bin[MAXN * 50];
 	struct tNode { int lc, rc; ll sz; } t[MAXN * 50];
-	inline int newnode() { return cntb ? bin[cntb--] : ++tot;}
+	inline int newnode() { return cntb ? bin[cntb--] : ++tot; }
 	inline void erase(int k) { bin[++cntb] = k; t[k] = {0, 0, 0}; }
 	void modify(int &k, int l, int r, int x, int v) {
 		if (!k) k = newnode(); t[k].sz += v;

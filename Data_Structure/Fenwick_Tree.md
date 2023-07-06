@@ -1,4 +1,4 @@
-Fenwick_Tree
+Fenwick_Tree (P3374)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -28,15 +28,15 @@ struct Fenwick_Tree {
 			ans += f[x];
 		return ans;
 	}
-} fwt;
+} BIT;
 int main() {
 	n = read(), m = read();
 	for (int i = 1; i <= n; ++i)
-		fwt.add(i, read());
+		BIT.add(i, read());
 	while (m--) {
 		int a = read(), b = read(), c = read();
-		if (a == 1) fwt.add(b, c);
-		else write(fwt.getsum(c) - fwt.getsum(b - 1)), putchar('\n');
+		if (a == 1) BIT.add(b, c);
+		else write(BIT.getsum(c) - BIT.getsum(b - 1)), putchar('\n');
 	}
 	return 0;
 }

@@ -1,4 +1,4 @@
-Ji_Segment_Tree
+Ji_Segment_Tree (P6242)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
