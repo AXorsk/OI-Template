@@ -10,7 +10,9 @@ inline int read() {
 }
 const int MAXN = 2e5 + 6;
 #define mid (l + r >> 1)
-int fa[MAXN * 30], sz[MAXN * 30], lson[MAXN * 30], rson[MAXN * 30];
+using ll = long long;
+ll sz[MAXN * 30];
+int fa[MAXN * 30], lson[MAXN * 30], rson[MAXN * 30];
 int n, m, ed[MAXN], tot;
 void build(int &k, int l, int r) {
 	k = ++tot;
