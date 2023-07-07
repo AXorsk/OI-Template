@@ -1,4 +1,4 @@
-2-SAT
+2-SAT (P4782)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

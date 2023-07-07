@@ -1,4 +1,4 @@
-Congruence-SP
+Congruence-SP (P2371)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

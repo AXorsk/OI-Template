@@ -1,4 +1,4 @@
-Eulerian Path
+Eulerian Path (P7771)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

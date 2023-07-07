@@ -1,4 +1,4 @@
-Maxflow (Dinic)
+Maxflow [Dinic] (P3376)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -65,7 +65,7 @@ int main() {
 		link(u, v, w);
 	}
 	dinic();
-	write(max_flow); putchar('\n');
+	write(max_flow), putchar('\n');
 	return 0;
 }
 ```

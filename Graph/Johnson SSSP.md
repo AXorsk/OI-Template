@@ -1,4 +1,4 @@
-Johnson (SSSP)
+Johnson SSSP (P5905)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -9,7 +9,7 @@ inline int read() {
 	return f ? -x : x;
 }
 using ll = long long;
-using pii = pair <ll, int>;
+using pli = pair <ll, int>;
 const int MAXN = 3e3 + 6, MAXM = 1e4 + 6, INF = 1e9;
 int n, m, cnte, hd[MAXN], inq[MAXN], vis[MAXN];
 ll h[MAXN], dis[MAXN];
@@ -37,7 +37,7 @@ bool SPFA(int s) {
 	return true;
 }
 void dijkstra(int s) {
-	priority_queue <pii> pq; pq.emplace(make_pair(0, s));
+	priority_queue <pli> pq; pq.emplace(make_pair(0, s));
 	for (int i = 1; i <= n; ++i) dis[i] = INF;
 	memset(vis, 0, sizeof vis); dis[s] = 0;
 	while (!pq.empty()) {
@@ -60,6 +60,8 @@ int main() {
 		int u = read(), v = read(), w = read();
 		link(u, v, w);
 	}
+	// The Ep function 'h' and the virtual node '0'
+	// are used to solve the problem of negative edges in Dijkstra
 	for (int i = 1; i <= n; ++i) 
 		link(0, i, 0);
 	if (!SPFA(0)) return puts("-1"), 0;

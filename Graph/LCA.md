@@ -1,4 +1,7 @@
-LCA: ST_Table
+LCA (P3379)
+
+ST_Table
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -52,7 +55,7 @@ int main() {
 	return 0;
 }
 ```
-LCA: Heavy-Light Decomposition
+Heavy-Light Decomposition
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -114,9 +117,9 @@ int main() {
 	return 0;
 }
 ```
-LCA: Tarjan
+Tarjan
 ```cpp
 ```
-LCA: Euler_(dfs)
+Euler_dfn
 ```cpp
 ```

@@ -1,4 +1,4 @@
-Bigraph-Match
+Bigraph-Match (P3386)
 
 Hungarian
 ```cpp
@@ -31,7 +31,7 @@ int main() {
 }
 ```
 
-Maxflow (Dinic)
+Maxflow [Dinic]
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

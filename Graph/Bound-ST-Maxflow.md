@@ -1,4 +1,4 @@
-Bound-ST-Maxflow (Dinic)
+Bound-ST-Maxflow [Dinic] (P5192)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

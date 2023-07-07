@@ -1,4 +1,4 @@
-Mincost-Maxflow (Dinic)
+Mincost-Maxflow [Dinic] (P3381)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

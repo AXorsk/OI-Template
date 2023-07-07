@@ -1,4 +1,4 @@
-Point Biconnected Component (Tarjan-V-DCC)
+Point Biconnected Component [Tarjan-V-DCC] (P8435)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -9,8 +9,9 @@ inline int read() {
 	return f ? -x : x;
 }
 const int MAXN = 5e5 + 6, MAXM = 2e6 + 6;
-int n, m, cnte = 1, totscc, tim, top, hd[MAXN], cut[MAXN];
+int n, m, cnte = 1, totscc, tim, top, hd[MAXN];
 int root, low[MAXN], dfn[MAXN], stk[MAXN];
+// int cut[MAXN];
 struct tEdge { int from, to, nxt; } e[MAXM << 1];
 vector <int> ans[MAXN];
 inline void link(int u, int v) {
@@ -24,15 +25,15 @@ void tarjan(int u, int fa) {
 		ans[++totscc].emplace_back(u);
 		return;
 	}
-	int subtree = 0;
+	// int subtree = 0;
 	for (int i = hd[u]; i; i = e[i].nxt) {
 		int v = e[i].to;
 		if (!dfn[v]) {
 			tarjan(v, u), low[u] = min(low[u], low[v]);
 			if (low[v] >= dfn[u]) {
-				++subtree;
-				if (u != root || subtree > 1)
-					cut[u] = 1;
+				// ++subtree;
+				// if (u != root || subtree > 1)
+				// 	cut[u] = 1;
 				++totscc; int k;
 				do {
 					k = stk[top--];
@@ -63,7 +64,7 @@ int main() {
 }
 ```
 
-Edge Biconnected Component (Tarjan-E-DCC)
+Edge Biconnected Component [Tarjan-E-DCC] (P8436)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

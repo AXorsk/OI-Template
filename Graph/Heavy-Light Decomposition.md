@@ -1,4 +1,4 @@
-Heavy-Light Decomposition
+Heavy-Light Decomposition (P3384)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -97,7 +97,7 @@ inline int queryR(int u, int v) {
 	int ans = 0;
 	while (top[u] != top[v]) {
 		if (dep[top[u]] < dep[top[v]]) swap(u, v);
-		ans = (ans + T.query(1, 1, N, id[top[u]], id[u])) % P;
+		ans = (1ll * ans + T.query(1, 1, N, id[top[u]], id[u])) % P;
 		u = fa[top[u]];
 	}
 	if (dep[u] > dep[v]) swap(u, v);
