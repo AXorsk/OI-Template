@@ -1,4 +1,4 @@
-BSGS
+BSGS (P3846)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

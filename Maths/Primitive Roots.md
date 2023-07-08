@@ -1,4 +1,4 @@
-Primitive Roots
+Primitive Roots (P6091)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

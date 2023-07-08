@@ -1,4 +1,4 @@
-Min-Steiner_Tree (P6192)
+Min-Steiner-Tree (P6192)
 
 ```cpp
 #include <bits/stdc++.h>

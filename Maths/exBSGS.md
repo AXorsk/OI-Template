@@ -1,4 +1,4 @@
-exBSGS
+exBSGS (P4195)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

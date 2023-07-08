@@ -1,4 +1,4 @@
-A-star
+A-star (P2324)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -10,7 +10,7 @@ map <mat, int> val, vis;
 struct tPos { int x, y; };
 struct tNode {
 	int pr, tot; tPos pt; mat st;
-	bool operator < (const tNode o) const {
+	bool operator < (const tNode &o) const {
 		return pr > o.pr;
 	}
 };
@@ -38,6 +38,7 @@ void misaka(tPos pt, mat st) {
 	while (!pq.empty()) {
 		tNode u = pq.top(); pq.pop();
 		if (u.pr > 16) continue;
+		// prune1: the inf of pr
 		for (int i = 0; i < 8; ++i) {
 			int x1 = u.pt.x + dx[i];
 			int y1 = u.pt.y + dy[i];
@@ -49,9 +50,11 @@ void misaka(tPos pt, mat st) {
 			if (vis.count(now)) continue;
 			tNode v = {f(now) + u.tot + 1, u.tot + 1, {x1, y1}, now};
 			pq.emplace(v); val[now] = v.pr;
-		}
-		if (u.tot == 15) return puts("-1"), void();
-		vis[u.st] = 1;
+ 		}
+ 		if (u.tot == 15) return puts("-1"), void();
+ 		// prune2: this is the first and best one to reach the inf of steps
+ 		//         and the laters won't be better
+ 		vis[u.st] = 1;
 	}
 	puts("-1");
 }

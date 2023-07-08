@@ -1,4 +1,4 @@
-Matrix-Tree
+Matrix-Tree (P6178)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

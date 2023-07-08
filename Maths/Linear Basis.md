@@ -1,4 +1,4 @@
-Linear Basis1 (max)
+Linear Basis1 [max] (P3812)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -29,7 +29,7 @@ int main() {
 	return 0;
 }
 ```
-Linear Basis2 (kth)
+Linear Basis2 [kth] (loj114)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -73,7 +73,7 @@ int main() {
 	return 0;
 }
 ```
-Prefix Linear Basis
+Prefix Linear Basis (CF1100F)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

@@ -1,4 +1,4 @@
-CRT
+CRT (P1495)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
