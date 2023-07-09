@@ -1,5 +1,5 @@
 # OI-Template
 
-This repositories includes some senior templates for OI Algorithm
+This repository includes some senior templates for OI Algorithms.
 
 **More convenient?** _Maybe._
