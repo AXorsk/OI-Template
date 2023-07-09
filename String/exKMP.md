@@ -1,4 +1,4 @@
-exKMP _(Function Z)_ 
+exKMP _Function Z_ (P5410)
 1. "extend"
 ```cpp
 #include <bits/stdc++.h>

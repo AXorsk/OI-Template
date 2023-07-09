@@ -1,4 +1,4 @@
-KMP
+KMP (P3375)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

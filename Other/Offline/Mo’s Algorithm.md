@@ -1,4 +1,4 @@
-Mo’s Algorithm (Original)
+Mo’s Algorithm [Original] (P1494)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -57,7 +57,7 @@ int main() {
 	return 0;
 }
 ```
-Mo’s Algorithm (Modifiable)
+Mo’s Algorithm [Modifiable] (P1903)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

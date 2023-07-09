@@ -1,4 +1,4 @@
-Simulate Annealing
+Simulate Annealing (P1337)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

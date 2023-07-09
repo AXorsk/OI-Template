@@ -1,4 +1,4 @@
-CDQ Divide (3D Partial Order)
+CDQ Divide _3D Partial Order_ (P3810)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -63,7 +63,6 @@ int main() {
 	chtholly(1, m);
 	for (int i = 1; i <= n; ++i){
 		if (lnk[i] != i) cnt[i] = cnt[lnk[i]];
-		// printf("f(%d) = %d\n", i, cnt[i]);
 		++ans[cnt[i]];
 	}
 	for (int i = 0; i < n; ++i)

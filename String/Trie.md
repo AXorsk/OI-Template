@@ -1,3 +1,4 @@
+Trie (P8306)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -29,7 +30,7 @@ struct Trie {
 		}
 		return cnt[u];
 	}
-} dic_tree;
+} T;
 inline int getid(char c) {
 	if (c >= '0' && c <= '9')
 		return c - '0' + 1;
@@ -38,27 +39,27 @@ inline int getid(char c) {
 	if (c >= 'a' && c <= 'z')
 		return c - 'a' + 37;
 }
-inline void misaka() {
-	dic_tree.clear();
+inline void solve() {
+	T.clear();
 	int n, q; scanf("%d%d", &n, &q);
 	while (n--) {
 		scanf("%s", s + 1);
 		int n = strlen(s + 1);
 		for (int i = 1; i <= n; ++i)
 			a[i] = getid(s[i]);
-		dic_tree.insert(a, n);
+		T.insert(a, n);
 	}
 	while (q--) {
 		scanf("%s", s + 1);
 		int n = strlen(s + 1);
 		for (int i = 1; i <= n; ++i)
 			a[i] = getid(s[i]);
-		printf("%d\n", dic_tree.count(a, n));
+		printf("%d\n", T.count(a, n));
 	}
 }
 int main() {
 	int T; scanf("%d", &T);
-	while (T--) misaka();
+	while (T--) solve();
 	return 0;
 }
 ```

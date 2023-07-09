@@ -1,75 +1,73 @@
-AC Automaton
+AC Automaton (P3796)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-const int MAXN = 1e6 + 6, ALP = 26;
-int f[MAXN], a[MAXN], m; char s[MAXN << 1];
-int id[MAXN], ans[MAXN], cnt[MAXN], unq[MAXN];
+const int MAXN = 1e6 + 6, MAXC = 26;
+int ans[MAXN], id[MAXN];
+char dic[200][80], t[MAXN];
 struct AC_Automaton {
-	int ch[MAXN][ALP], fail[MAXN], tot;
+	int ch[MAXN][MAXC], fail[MAXN], size;
 	AC_Automaton() {
 		memset(ch, 0, sizeof ch);
 		memset(fail, 0, sizeof fail);
-		tot = 0;
+		memset(id, 0, sizeof id);
+		memset(ans, 0, sizeof ans);
+		size = 0;
 	}
-	inline void insert(char *s, int k) {
-		int u = 0, n = strlen(s + 1);
-		for (int i = 1; i <= n; ++i) {
+	inline void insert(char s[], int k) {
+		int u = 0;
+		for (int i = 1; s[i]; ++i) {
 			int c = s[i] - 'a';
-			if (!ch[u][c]) ch[u][c] = ++tot;
+			if (!ch[u][c]) ch[u][c] = ++size;
 			u = ch[u][c];
 		}
-		if (id[u]) unq[k] = id[u];
-		else id[u] = k;
+		id[u] = k;
 	}
-	inline void get_fail() {
+	inline void getfail() {
+		int u = 0;
 		queue <int> q;
-		for (int i = 0; i < ALP; ++i)
+		for (int i = 0; i < MAXC; ++i)
 			if (ch[0][i]) {
 				q.emplace(ch[0][i]);
 				fail[ch[0][i]] = 0;
 			}
 		while (!q.empty()) {
 			int u = q.front(); q.pop();
-			for (int i = 0; i < ALP; ++i) {
+			for (int i = 0; i < MAXC; ++i) {
 				int v = ch[u][i];
-				if (!v) ch[u][i] = ch[fail[u]][i];
-				else fail[v] = ch[fail[u]][i], q.emplace(v);
+				if (v) fail[v] = ch[fail[u]][i], q.emplace(v);
+				else ch[u][i] = ch[fail[u]][i];
 			}
 		}
-		for (int i = 1; i <= tot; ++i) f[fail[i]] = 1;
-		for (int i = 1; i <= tot; ++i) if (!f[i]) a[++m] = i;
 	}
-	inline void query(char *s) {
-		int u = 0, n = strlen(s + 1);
-		for (int i = 1; i <= n; ++i) {
+	inline void query(char s[]) {
+		int u = 0, res = 0;
+		for (int i = 1; s[i]; ++i) {
 			u = ch[u][s[i] - 'a'];
-			++cnt[u];
+			for (int j = u; j; j = fail[j])
+				++ans[id[j]];
 		}
 	}
-	inline void misaka() {
-		for (int i = 1; i <= m; ++i) {
-			int u = a[i], now = 0;
-			for (int j = u; j; j = fail[j]) {
-				now += cnt[j];
-				cnt[j] = 0;
-				ans[id[j]] += now;
-			}
-		}
-	}
-} ACM;
+};
 int main() {
 	int n; scanf("%d", &n);
-	for (int i = 1; i <= n; ++i) {
-		scanf("%s", s + 1);
-		ACM.insert(s, i);
-	}
-	ACM.get_fail(); scanf("%s", s + 1);
-	ACM.query(s); ACM.misaka();
-	for (int i = 1; i <= n; ++i) {
-		int j = i;
-		if (unq[i]) j = unq[i];
-		printf("%d\n", ans[j]);
+	while (n) {
+		AC_Automaton AC;
+		for (int i = 1; i <= n; ++i) {
+			scanf("%s", dic[i] + 1);
+			AC.insert(dic[i], i);
+		}
+		AC.getfail();
+		scanf("%s", t + 1);
+		AC.query(t);
+		int mx = 0;
+		for (int i = 1; i <= n; ++i)
+			mx = max(mx, ans[i]);
+		printf("%d\n", mx);
+		for (int i = 1; i <= n; ++i)
+			if (ans[i] == mx)
+				puts(dic[i] + 1);
+		scanf("%d", &n);
 	}
 	return 0;
 }

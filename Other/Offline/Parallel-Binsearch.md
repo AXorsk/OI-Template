@@ -1,4 +1,4 @@
-Parallel-Binsearch
+Parallel-Binsearch (P1527)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

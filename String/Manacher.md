@@ -1,4 +1,4 @@
-Manacher
+Manacher (P3805)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

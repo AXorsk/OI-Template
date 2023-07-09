@@ -1,4 +1,4 @@
-Subsequence Automaton
+Subsequence Automaton (P5826)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

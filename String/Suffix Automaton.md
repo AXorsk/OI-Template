@@ -1,4 +1,4 @@
-Suffix Automaton
+Suffix Automaton (P3804)
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
