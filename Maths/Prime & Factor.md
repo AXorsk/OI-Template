@@ -55,14 +55,14 @@ ll fac(ll n) { // Pollard_Rho
 		auto f = [=] (ll x) { return ((__int128)x * x + c) % n; };
 		ll i = 0, j = 0, p = 1;
 		do {
-			for (int t = 1; t <= 128; ++t) {
+			for (int t = 0; t < 128; ++t) {
 				i = f(i), j = f(f(j));
 				if (i == j) break;
 				ll np = (__int128)p * llabs(j - i) % n;
 				if (!np) break; p = np;
 			}
-			ll d = gcd(p, n);
-			if (d > 1) return d;
+			ll g = gcd(p, n);
+			if (g > 1) return g;
 		} while (i != j);
 	}
 }
