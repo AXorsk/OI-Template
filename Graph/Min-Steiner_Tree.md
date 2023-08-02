@@ -42,11 +42,14 @@ int main() {
 		p[i] = read();
 		dp[p[i]][1 << i - 1] = 0;
 	}
+    // there's two possible situations:
+    // dp[i][s] <- min{dp[i][t] + dp[i][s\t]}: deg[i] > 1
+    // dp[i][s] <- min{dp[j][i] + w(i, j)}: deg[i] = 1
 	for (int s = 1; s <= (1 << k) - 1; ++s) {
 		for (int i = 1; i <= n; ++i) {
 			for (int t = s & s - 1; t; t = t - 1 & s)
 				dp[i][s] = min(dp[i][s], dp[i][t] + dp[i][s ^ t]);
-			if (dp[i][s] < 0x3f3f3f3f) q.push(i), vis[i] = 1;
+			if (dp[i][s] < 0x3f3f3f3f) q.emplace(i), vis[i] = 1;
 		}
 		SPFA(s);
 	}
